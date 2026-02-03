@@ -1,26 +1,25 @@
-import { useEffect, useState } from 'react';
-
-type Task = { id: string; title: string };
-type Project = { id: string; name: string; tasks: Task[] };
-
-const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import { useProjects } from './hooks/useProjects';
 
 function App() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    fetch(`${apiUrl}/projects`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProjects(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
-  if (loading) return <div>Loading...</div>;
+
+  const { data: projects, isLoading, isError, error } = useProjects();
+
+  if (isLoading) return <div>Loading...</div>
+
+  if (isError) {
+    const message = error instanceof Error ? error.message: 'Unknown error';
+    return <div>Error: {message}</div>
+  }
+
+  if (!projects || projects.length === 0) {
+    return (
+      <div style={{ padding: 24}}>
+        <h1>Pocket PM - projects</h1>
+        <div>No projects found</div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ padding: 24 }}>
       <h1>PocketPM - Projects</h1>
