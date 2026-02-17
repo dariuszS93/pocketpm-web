@@ -1,7 +1,7 @@
 type Task = {
   id: string;
   title: string;
-}
+};
 
 type Project = {
   id: string;
@@ -16,12 +16,32 @@ export async function getProjects(): Promise<Project[]> {
 
   if (!response.ok) {
     const text = await response.text().catch(() => '');
-    throw new Error(`API error: ${response.status}: ${text || response.statusText}`);
+    throw new Error(
+      `API error: ${response.status}: ${text || response.statusText}`,
+    );
   }
 
   return (await response.json()) as Project[];
 }
 
-export async function addTask() {
-  // TODO: implement adding a task to a project
+export async function addTask(
+  projectId: string,
+  title: string,
+): Promise<{ id: string; title: string }> {
+  const response = await fetch(`${apiUrl}/projects/${projectId}/tasks`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ title }),
+  });
+
+  if (!response.ok) {
+    const text = await response.text().catch(() => '');
+    throw new Error(
+      `API error: ${response.status}: ${text || response.statusText}`,
+    );
+  }
+
+  return response.json();
 }
