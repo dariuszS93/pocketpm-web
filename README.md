@@ -1,73 +1,110 @@
-# React + TypeScript + Vite
+# PocketPM Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React (Vite) web app for managing projects and tasks.
 
-Currently, two official plugins are available:
+The goal of this README is to provide quick setup and run instructions.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Tech stack
+- React 19  
+- TypeScript  
+- Vite  
+- TanStack React Query
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Requirements
+- Node.js (recommended: latest LTS)  
+- npm
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Installation
+- [ ] Clone the repository  
+- [ ] Install dependencies
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+ npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
+## Backend API \(required for full app\)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+For the full application to work, you also need to run the backend repository: `pocketpm-api`.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+- This frontend app depends on the API being available (running locally or deployed).
+- Setup details (including `DATABASE_URL`, Prisma generate/migrations, and how to run the API) are described in the `pocketpm-api` repository README.
+
+In short:
+- clone and run `pocketpm-api` in parallel with this app
+- follow the backend README for configuration and startup steps
+
+### URL:
+- https://github.com/dariuszS93/pocketpm-api
+---
+
+## Running locally
+
+### Dev server
+```bash
+ npm run dev
 ```
+
+### Build for production
+```bash
+ npm run build
+```
+
+### Preview production build
+```bash
+ npm run preview
+```
+
+### Lint
+```bash
+ npm run lint
+```
+
+### Format (if configured)
+```bash
+ npm run format
+```
+
+---
+
+## Configuration (optional)
+
+### Environment variables (Vite)
+If the app uses an API base URL, configure it via Vite env variables\.
+
+1) Create file: `.env.local`  
+2) Add variables, for example:  
+```bash
+VITE_API_BASE_URL=http://localhost:3000
+```
+
+Then read them in code using:  
+- `import.meta.env.VITE_API_BASE_URL`
+
+Note:  
+- [ ] If you do not use env vars yet, you can skip this section
+
+---
+
+## License
+
+This repository is proprietary and not open source.
+
+You may not copy, modify, distribute, or use this code without explicit written permission from the author.  
+See: `LICENSE`.
+
+---
+
+## Screenshot
+
+Place your screenshot in the repo, for example:  
+- `docs/screenshot.png`
+
+Then reference it here:  
+![App screenshot](docs/screenshots/0.1.1.png)
