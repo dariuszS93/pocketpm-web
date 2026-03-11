@@ -45,3 +45,15 @@ export async function addTask(
 
   return response.json();
 }
+
+export async function toggleTask(taskId: string) {
+  const response = await fetch(`${apiUrl}/tasks/${taskId}/toggle`, {
+    method: 'PATCH',
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to toggle task');
+  }
+
+  return response.json();
+}

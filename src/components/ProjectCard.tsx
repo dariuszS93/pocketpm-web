@@ -1,7 +1,8 @@
-import { useAddTask } from '../hooks/useAddTask.ts';
+import { useAddTask } from '../hooks/useAddTask';
 import { useState } from 'react';
+import { useToggleTask } from '../hooks/useToggleTask';
 
-type Task = { id: string; title: string };
+type Task = { id: string; title: string; done: boolean };
 type Project = { id: string; name: string; tasks: Task[] };
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 
 export const ProjectCard = ({ project }: Props) => {
   const { mutate: addTask, isPending } = useAddTask();
+  const { mutate: toggleTaskMutation } = useToggleTask();
 
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
@@ -20,7 +22,18 @@ export const ProjectCard = ({ project }: Props) => {
       <h3>{project.name}</h3>
       <ul>
         {project.tasks.map((t) => (
-          <li key={t.id}>{t.title}</li>
+          <li key={t.id}>
+            <span
+              onClick={() => toggleTaskMutation(t.id)}
+              style={{
+                cursor: 'pointer',
+                textDecoration: t.done ? 'line-through' : 'none',
+                color: t.done ? '#888' : 'inherit',
+              }}
+            >
+              {t.title}
+            </span>
+          </li>
         ))}
       </ul>
       <div style={{ marginTop: 8 }}>
