@@ -21,15 +21,15 @@ The goal of this README is to provide quick setup and run instructions.
 ---
 
 ## Installation
-- [ ] Clone the repository  
-- [ ] Install dependencies
+-  Clone the repository  
+-  Install dependencies
 
 ```bash
  npm install
 ```
 
 ---
-## Backend API \(required for full app\)
+## Backend API (required for full app)
 
 For the full application to work, you also need to run the backend repository: `pocketpm-api`.
 
@@ -76,7 +76,7 @@ In short:
 ## Configuration (optional)
 
 ### Environment variables (Vite)
-If the app uses an API base URL, configure it via Vite env variables\.
+If the app uses an API base URL, configure it via Vite env variables.
 
 1) Create file: `.env.local`  
 2) Add variables, for example:  
@@ -88,7 +88,7 @@ Then read them in code using:
 - `import.meta.env.VITE_API_BASE_URL`
 
 Note:  
-- [ ] If you do not use env vars yet, you can skip this section
+-  If you do not use env vars yet, you can skip this section
 
 ---
 
