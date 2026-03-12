@@ -124,4 +124,4 @@ Place your screenshot in the repo, for example:
 - `docs/screenshot.png`
 
 Then reference it here:  
-![App screenshot](docs/screenshots/0.2.0.png)
+![App screenshot](docs/screenshots/0.3.0.png)

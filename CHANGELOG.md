@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 - Refactor of data approach, new hooks and queries
 - Change repo name in package\.json
 - Install and config prettier, format repo
+- toggling tasks as done/undone
+- deleting tasks
 
 ---
 
