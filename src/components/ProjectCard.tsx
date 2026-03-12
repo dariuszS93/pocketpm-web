@@ -1,6 +1,7 @@
 import { useAddTask } from '../hooks/useAddTask';
 import { useState } from 'react';
 import { useToggleTask } from '../hooks/useToggleTask';
+import { useDeleteTask } from '../hooks/useDeleteTask.ts';
 
 type Task = { id: string; title: string; done: boolean };
 type Project = { id: string; name: string; tasks: Task[] };
@@ -12,6 +13,7 @@ type Props = {
 export const ProjectCard = ({ project }: Props) => {
   const { mutate: addTask, isPending } = useAddTask();
   const { mutate: toggleTaskMutation } = useToggleTask();
+  const { mutate: deleteTaskMutation, isPending: isDeleting } = useDeleteTask();
 
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
@@ -22,17 +24,33 @@ export const ProjectCard = ({ project }: Props) => {
       <h3>{project.name}</h3>
       <ul>
         {project.tasks.map((t) => (
-          <li key={t.id}>
+          <li
+            key={t.id}
+            style={{ display: 'flex', gap: 8, alignItems: 'center' }}
+          >
             <span
               onClick={() => toggleTaskMutation(t.id)}
               style={{
                 cursor: 'pointer',
                 textDecoration: t.done ? 'line-through' : 'none',
                 color: t.done ? '#888' : 'inherit',
+                flex: 1,
               }}
             >
               {t.title}
             </span>
+            <button
+              onClick={() => {
+                if (!confirm('Delete this task?')) return;
+                deleteTaskMutation(t.id);
+              }}
+              disabled={isDeleting}
+              aria-label="Delete task"
+              title="Delete task"
+              style={{ color: 'red' }}
+            >
+              x
+            </button>
           </li>
         ))}
       </ul>
