@@ -1,5 +1,5 @@
 import { useProjects } from './hooks/useProjects';
-import { ProjectCard } from './components/ProjectCard.tsx';
+import { ProjectCard } from './components/ProjectCard';
 
 function App() {
   const { data: projects, isLoading, isError, error } = useProjects();

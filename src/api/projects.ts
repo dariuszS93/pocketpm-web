@@ -1,13 +1,4 @@
-type Task = {
-  id: string;
-  title: string;
-};
-
-type Project = {
-  id: string;
-  name: string;
-  tasks: Task[];
-};
+import type { Project } from '../types/project';
 
 const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 

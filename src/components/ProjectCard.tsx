@@ -1,10 +1,8 @@
 import { useAddTask } from '../hooks/useAddTask';
 import { useState } from 'react';
 import { useToggleTask } from '../hooks/useToggleTask';
-import { useDeleteTask } from '../hooks/useDeleteTask.ts';
-
-type Task = { id: string; title: string; done: boolean };
-type Project = { id: string; name: string; tasks: Task[] };
+import { useDeleteTask } from '../hooks/useDeleteTask';
+import type { Project } from '../types/project';
 
 type Props = {
   project: Project;
